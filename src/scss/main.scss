@@ -3,3 +3,7 @@ body {
   height: 100%;
   background: #707AAA;
 }
+
+.break-time__add, .break-time__sub,  .work-time__add, .work-time__sub:hover {
+  cursor: pointer;
+}

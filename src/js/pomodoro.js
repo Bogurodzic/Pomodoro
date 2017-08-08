@@ -2,27 +2,60 @@ let timerSingleton = (function(){
 
   var instance;
 
+  var breakTime = 5;
   var time = 25;
-  var counter = document.getElementById("counter");
 
-  function reload(){
+  var counter = document.getElementById("counter");
+  var breakValue = document.getElementById("break-value");
+  var workValue = document.getElementById("work-value");
+
+  var addBreak = document.getElementById("break-add");
+  addBreak.addEventListener("click", function(){
+    breakTime += 5;
+    reloadBreak();
+  })
+  var subBreak = document.getElementById("break-sub");
+  subBreak.addEventListener("click", function(){
+    breakTime -= 5;
+    reloadBreak();
+  });
+
+  var addCounter = document.getElementById("work-add");
+  addCounter.addEventListener("click", function(){
+    time += 5;
+    reloadCounter();
+    reloadWork();
+  });
+  var subCounter = document.getElementById("work-sub");
+  subCounter.addEventListener("click", function(){
+    time -= 5;
+    reloadCounter();
+    reloadWork();
+  });
+
+  reloadBreak();
+  reloadCounter();
+  reloadWork();
+
+  function reloadCounter(){
     counter.innerText = time;
+  }
+
+  function reloadBreak(){
+    breakValue.innerText = breakTime;
+  }
+
+  function reloadWork(){
+    workValue.innerText = time;
   }
 
   function init(){
     return {
-      add: function(){
-        time += 5;
-      },
 
-      substract: function(){
-        time -= 5;
-      },
-
-      startCounter: function(fun){
+      startCounter: function(fun) {
         setInterval(function(){
           time--;
-          console.log(time);
+          reload();
         }, 1000);
       }
 
@@ -41,4 +74,4 @@ let timerSingleton = (function(){
 }());
 
 let timer = timerSingleton.getInstance();
-timer.startCounter();
+//timer.startCounter();
