@@ -6,6 +6,8 @@ const autoprefixer = require('gulp-autoprefixer');
 const imagemin = require('gulp-imagemin');
 const runSequence = require('run-sequence');
 const browserSync = require('browser-sync');
+const shell = require('gulp-shell');
+
 
 gulp.task("clean", function(){
 	return del("build/**/*");
@@ -41,8 +43,14 @@ gulp.task("images", function(){
 	.pipe(gulp.dest("build/"));
 });
 
+gulp.task("webpack", function(){
+  shell('npm start');
+});
+
 gulp.task("watch", function(){
+  gulp.watch("src/js/*", ["webpack"]);
 	gulp.watch("src/scss/**/*.scss", ["sass"]);
+  gulp.watch("src/scss/*.scss", ["sass"]);
 	gulp.watch("src/css/*.css", ["autoprefixer"]);
 	gulp.watch(["src/css/*.css", "src/index.html", "src/js/*.js", "src/scss/*"], browserSync.reload);
 });
