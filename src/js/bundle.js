@@ -83,6 +83,9 @@ var timerSingleton = function () {
 
   var instance;
 
+  var interval;
+  var timerFlag = false;
+
   var breakTime = 5;
   var time = 25;
 
@@ -91,34 +94,16 @@ var timerSingleton = function () {
   var workValue = document.getElementById("work-value");
 
   var addBreak = document.getElementById("break-add");
-  addBreak.addEventListener("click", function () {
-    breakTime += 5;
-    reloadBreak();
-  });
   var subBreak = document.getElementById("break-sub");
-  subBreak.addEventListener("click", function () {
-    breakTime -= 5;
-    reloadBreak();
-  });
-
   var addCounter = document.getElementById("work-add");
-  addCounter.addEventListener("click", function () {
-    time += 5;
-    reloadCounter();
-    reloadWork();
-  });
   var subCounter = document.getElementById("work-sub");
-  subCounter.addEventListener("click", function () {
-    time -= 5;
-    reloadCounter();
-    reloadWork();
-  });
 
   reloadBreak();
-  reloadCounter();
-  reloadWork();
+  reloadCounter(time);
+  reloadWork(time);
+  addListeners();
 
-  function reloadCounter() {
+  function reloadCounter(time) {
     counter.innerText = time;
   }
 
@@ -126,21 +111,84 @@ var timerSingleton = function () {
     breakValue.innerText = breakTime;
   }
 
-  function reloadWork() {
+  function reloadWork(time) {
     workValue.innerText = time;
   }
 
-  function init() {
-    return {
-
-      startCounter: function startCounter(fun) {
-        setInterval(function () {
-          time--;
-          reload();
-        }, 1000);
+  function addListeners() {
+    addBreak.addEventListener("click", function () {
+      if (!checkTimerFlag()) {
+        breakTime += 5;
+        reloadBreak();
       }
+    });
 
-    };
+    subBreak.addEventListener("click", function () {
+      if (!checkTimerFlag()) {
+        breakTime -= 5;
+        reloadBreak();
+      }
+    });
+
+    addCounter.addEventListener("click", function () {
+      if (!checkTimerFlag()) {
+        time += 5;
+        reloadCounter(time);
+        reloadWork(time);
+      };
+    });
+
+    subCounter.addEventListener("click", function () {
+      if (!checkTimerFlag()) {
+        time -= 5;
+        reloadCounter(time);
+        reloadWork(time);
+      }
+    });
+
+    counter.addEventListener("click", function () {
+      if (interval) {
+        stopCounter();
+      } else {
+        startCounter(time);
+      }
+    });
+  }
+
+  function startCounter(time) {
+    console.log("started");
+    interval = setInterval(function () {
+      time--;
+      reloadCounter(time);
+    }, 1000);
+    toggleTimerFlag();
+  }
+
+  function stopCounter() {
+    clearInterval(interval);
+    interval = undefined;
+    toggleTimerFlag();
+    console.log("cleared");
+  }
+
+  function toggleTimerFlag() {
+    if (timerFlag === false) {
+      timerFlag = true;
+    } else if (timerFlag === true) {
+      timerFlag = false;
+    }
+  }
+
+  function checkTimerFlag() {
+    if (timerFlag === true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function init() {
+    return {};
   }
 
   return {
@@ -154,7 +202,6 @@ var timerSingleton = function () {
 }();
 
 var timer = timerSingleton.getInstance();
-//timer.startCounter();
 
 /***/ })
 /******/ ]);
