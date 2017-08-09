@@ -4,6 +4,7 @@ let timerSingleton = (function(){
 
   var interval;
   var timerFlag = false;
+  var audio = new Audio('../audio/audio.mp3');
 
   var timeView = {
     counter: document.getElementById("counter"),
@@ -21,7 +22,8 @@ let timerSingleton = (function(){
     subBreak : document.getElementById("break-sub"),
     addCounter : document.getElementById("work-add"),
     subCounter : document.getElementById("work-sub"),
-    counter: document.getElementById("counter")
+    counter: document.getElementById("counter"),
+    stop: document.getElementById("stop")
   }
 
 
@@ -80,6 +82,10 @@ let timerSingleton = (function(){
         startCounter(timeValues.time);
       }
     });
+
+    buttons.stop.addEventListener("click", function(){
+      stopAlarmSound();
+    });
   }
 
   function startCounter(time) {
@@ -120,8 +126,11 @@ let timerSingleton = (function(){
   }
 
   function playAlarmSound(){
-    var audio = new Audio('../audio/audio.mp3');
     audio.play();
+  }
+
+  function stopAlarmSound(){
+    audio.pause();
   }
 
   function toggleTimerFlag() {

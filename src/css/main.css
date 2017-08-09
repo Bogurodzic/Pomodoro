@@ -5,3 +5,12 @@ body {
 
 .clock__time, .break-time__add, .break-time__sub, .work-time__add, .work-time__sub:hover {
   cursor: pointer; }
+
+.stop-button {
+  width: 130px;
+  height: 40px;
+  background: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center; }
