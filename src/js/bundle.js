@@ -94,7 +94,7 @@ var timerSingleton = function () {
 
   var timeValues = {
     break: 5,
-    time: 25
+    time: 0.10
   };
 
   var buttons = {
@@ -167,6 +167,7 @@ var timerSingleton = function () {
     interval = setInterval(function () {
       time = calculateTime(time);
       reloadCounter(time);
+      checkRemainingTime(time);
     }, 1000);
     toggleTimerFlag();
   }
@@ -184,6 +185,22 @@ var timerSingleton = function () {
     } else if (time % 1 !== 0) {
       return (time - 0.01).toFixed(2);
     }
+  }
+
+  function checkRemainingTime(time) {
+    if (time <= 0) {
+      alarm();
+    }
+  }
+
+  function alarm() {
+    playAlarmSound();
+    stopCounter();
+  }
+
+  function playAlarmSound() {
+    var audio = new Audio('../audio/audio.mp3');
+    audio.play();
   }
 
   function toggleTimerFlag() {
