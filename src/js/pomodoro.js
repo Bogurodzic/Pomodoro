@@ -85,7 +85,7 @@ let timerSingleton = (function(){
   function startCounter(time) {
     console.log("started");
     interval = setInterval(function(){
-      time--;
+      time = calculateTime(time);
       reloadCounter(time);
       }, 1000);
     toggleTimerFlag();
@@ -96,6 +96,14 @@ let timerSingleton = (function(){
     interval = undefined;
     toggleTimerFlag();
     console.log("cleared");
+  }
+
+  function calculateTime(time){
+    if(time%1 === 0){
+      return time-1+0.59;
+    } else if (time%1 !== 0){
+      return (time-0.01).toFixed(2);
+    }
   }
 
   function toggleTimerFlag() {
