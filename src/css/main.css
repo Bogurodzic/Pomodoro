@@ -6,11 +6,45 @@ body {
 .clock__time, .break-time__add, .break-time__sub, .work-time__add, .work-time__sub:hover {
   cursor: pointer; }
 
+.setup {
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around; }
+
+.break-time {
+  font-size: 35px; }
+
+.work-time {
+  font-size: 35px; }
+
+.clock {
+  margin: 0 auto;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  border-radius: 50%; }
+
+.clock__time {
+  text-align: center;
+  font-size: 35px; }
+
 .stop-button {
+  margin: 0 auto;
+  margin-top: 50px;
   width: 130px;
   height: 40px;
-  background: grey;
   display: flex;
   justify-content: center;
   align-items: center;
-  align-content: center; }
+  align-content: center;
+  border: 1px solid black; }
+  .stop-button:hover {
+    cursor: pointer; }
+  .stop-button--hidden {
+    display: none; }

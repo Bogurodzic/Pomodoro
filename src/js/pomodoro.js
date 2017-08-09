@@ -121,6 +121,7 @@ let timerSingleton = (function(){
   }
 
   function alarm(){
+    toggleStopButton();
     playAlarmSound();
     stopCounter();
   }
@@ -130,6 +131,7 @@ let timerSingleton = (function(){
   }
 
   function stopAlarmSound(){
+    toggleStopButton();
     audio.pause();
   }
 
@@ -147,6 +149,10 @@ let timerSingleton = (function(){
     } else {
       return false;
     }
+  }
+
+  function toggleStopButton(){
+    buttons.stop.classList.toggle("stop-button--hidden");
   }
 
   function init(){
