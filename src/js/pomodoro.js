@@ -5,72 +5,79 @@ let timerSingleton = (function(){
   var interval;
   var timerFlag = false;
 
-  var breakTime = 5;
-  var time = 25;
+  var timeView = {
+    counter: document.getElementById("counter"),
+    break: document.getElementById("break-value"),
+    work: document.getElementById("work-value")
+  }
 
-  var counter = document.getElementById("counter");
-  var breakValue = document.getElementById("break-value");
-  var workValue = document.getElementById("work-value");
+  var timeValues = {
+    break: 5,
+    time: 25
+  }
 
-  var addBreak = document.getElementById("break-add");
-  var subBreak = document.getElementById("break-sub");
-  var addCounter = document.getElementById("work-add");
-  var subCounter = document.getElementById("work-sub");
+  var buttons = {
+    addBreak: document.getElementById("break-add"),
+    subBreak : document.getElementById("break-sub"),
+    addCounter : document.getElementById("work-add"),
+    subCounter : document.getElementById("work-sub"),
+    counter: document.getElementById("counter")
+  }
 
 
   reloadBreak();
-  reloadCounter(time);
-  reloadWork(time);
-  addListeners();
+  reloadCounter(timeValues.time);
+  reloadWork(timeValues.time);
+  addListeners(buttons);
 
   function reloadCounter(time){
-    counter.innerText = time;
+    timeView.counter.innerText = time;
   }
 
   function reloadBreak(){
-    breakValue.innerText = breakTime;
+    timeView.break.innerText = timeValues.break;
   }
 
   function reloadWork(time){
-    workValue.innerText = time;
+    timeView.work.innerText = time;
   }
 
-  function addListeners(){
-    addBreak.addEventListener("click", function(){
+  function addListeners(buttons){
+    buttons.addBreak.addEventListener("click", function(){
       if(!checkTimerFlag()){
-        breakTime += 5;
+        timeValues.break += 5;
         reloadBreak();
       }
     });
 
-    subBreak.addEventListener("click", function(){
+    buttons.subBreak.addEventListener("click", function(){
       if(!checkTimerFlag()){
-        breakTime -= 5;
+        timeValues.break -= 5;
         reloadBreak();
       }
     });
 
-    addCounter.addEventListener("click", function(){
+    buttons.addCounter.addEventListener("click", function(){
       if(!checkTimerFlag()){
-        time += 5;
-        reloadCounter(time);
-        reloadWork(time)
+        timeValues.time += 5;
+        reloadCounter(timeValues.time);
+        reloadWork(timeValues.time)
       };
     });
 
-    subCounter.addEventListener("click", function(){
+    buttons.subCounter.addEventListener("click", function(){
       if(!checkTimerFlag()){
-        time -= 5;
-        reloadCounter(time);
-        reloadWork(time);
+        timeValues.time -= 5;
+        reloadCounter(timeValues.time);
+        reloadWork(timeValues.time);
       }
     });
 
-    counter.addEventListener("click", function(){
+    buttons.counter.addEventListener("click", function(){
       if(interval){
         stopCounter();
       } else{
-        startCounter(time);
+        startCounter(timeValues.time);
       }
     });
   }
