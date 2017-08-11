@@ -95,7 +95,7 @@ var timerSingleton = function () {
 
   var timeValues = {
     break: 5,
-    time: 0.10
+    time: 25
   };
 
   var buttons = {

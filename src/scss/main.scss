@@ -25,6 +25,7 @@ body {
 }
 
 .clock {
+  position: relative;
   margin: 0 auto;
   margin-top: 50px;
   display: flex;
@@ -34,6 +35,13 @@ body {
   height: 200px;
   border: 1px solid black;
   border-radius: 50%;
+}
+
+.clock__text {
+  display: inline-block;
+  position: absolute;
+  top: 30%;
+  font-size: 20px;
 }
 
 .clock__time {
@@ -59,4 +67,9 @@ body {
   &--hidden {
     display: none;
   }
+}
+
+.work-time__text, .break-time__text {
+  display: block;
+  text-align: center;
 }

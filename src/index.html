@@ -3,23 +3,26 @@
   <head>
     <meta charset="utf-8">
     <title>Pomodoro</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
     <h2></h2>
     <div class="setup">
       <div class="break-time">
+        <span class="break-time__text">Break</span>
         <span id="break-add" class="break-time__add">+</span>
         <span id="break-value" class="break-time__value"></span>
         <span id="break-sub" class="break-time__sub">-</span>
       </div>
       <div class="work-time">
+        <span class="work-time__text">Work</span>
         <span id="work-add" class="work-time__add">+</span>
         <span id="work-value" class="work-time__value"></span>
         <span id="work-sub" class="work-time__sub">-</span>
       </div>
     </div>
     <div class="clock">
+      <span class="clock__text">Time left:</span>
       <p class="clock__time" id="counter"></p>
     </div>
     <div id="stop" class="stop-button stop-button--hidden">STOP ALARM</div>
