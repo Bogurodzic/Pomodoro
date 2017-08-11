@@ -180,7 +180,6 @@ var timerSingleton = function () {
   }
 
   function startCounter(time) {
-    console.log("started");
     interval = setInterval(function () {
       time = calculateTime(time);
       reloadCounter(time);
@@ -193,7 +192,6 @@ var timerSingleton = function () {
     clearInterval(interval);
     interval = undefined;
     toggleTimerFlag();
-    console.log("cleared");
   }
 
   function calculateTime(time) {
@@ -240,15 +238,15 @@ var timerSingleton = function () {
   }
 
   function toggleTimerFlag() {
-    if (timerFlag === false) {
+    if (!timerFlag) {
       timerFlag = true;
-    } else if (timerFlag === true) {
+    } else if (timerFlag) {
       timerFlag = false;
     }
   }
 
   function checkTimerFlag() {
-    if (timerFlag === true) {
+    if (timerFlag) {
       return true;
     } else {
       return false;
@@ -256,9 +254,9 @@ var timerSingleton = function () {
   }
 
   function changeBreakNext() {
-    if (breakNext === false) {
+    if (!breakNext) {
       breakNext = true;
-    } else if (breakNext === true) {
+    } else if (breakNext) {
       breakNext = false;
     }
   }
@@ -268,9 +266,9 @@ var timerSingleton = function () {
   }
 
   function checkBreak() {
-    if (breakNext === true) {
+    if (breakNext) {
       return true;
-    } else if (breakNext === false) {
+    } else if (!breakNext) {
       return false;
     }
   }
