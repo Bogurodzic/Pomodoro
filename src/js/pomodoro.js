@@ -4,6 +4,7 @@ let timerSingleton = (function(){
 
   var interval;
   var timerFlag = false;
+  var breakNext = false;
   var audio = new Audio('../audio/audio.mp3');
 
   var timeView = {
@@ -13,8 +14,8 @@ let timerSingleton = (function(){
   }
 
   var timeValues = {
-    break: 5,
-    time: 25
+    break: 0.05,
+    time: 0.02
   }
 
   var buttons = {
@@ -79,12 +80,22 @@ let timerSingleton = (function(){
       if(interval){
         stopCounter();
       } else{
-        startCounter(timeValues.time);
+        if(checkBreak()){
+          startCounter(timeValues.break)
+        } else if (!checkBreak()){
+          startCounter(timeValues.time)
+        }
       }
     });
 
     buttons.stop.addEventListener("click", function(){
       stopAlarmSound();
+      changeBreakNext()
+      if(checkBreak()){
+        reloadCounter(timeValues.break)
+      } else if (!checkBreak()){
+        reloadCounter(timeValues.time)
+      }
     });
   }
 
@@ -133,6 +144,21 @@ let timerSingleton = (function(){
   function stopAlarmSound(){
     toggleStopButton();
     audio.pause();
+    changeMode();
+  }
+
+  function changeMode(){
+    var clockText = document.getElementById("clock-text");
+    if(checkBreak()){
+      changeClockText(clockText, "Break Time:");
+    } else if (!checkBreak()){
+      changeClockText(clockText, "Remaining Time:");
+    }
+
+  }
+
+  function changeClockText(ele, text){
+    ele.innerText = text;
   }
 
   function toggleTimerFlag() {
@@ -151,8 +177,24 @@ let timerSingleton = (function(){
     }
   }
 
+  function changeBreakNext(){
+    if(breakNext===false) {
+      breakNext = true;
+    } else if (breakNext === true) {
+      breakNext = false;
+    }
+  }
+
   function toggleStopButton(){
     buttons.stop.classList.toggle("stop-button--hidden");
+  }
+
+  function checkBreak(){
+    if(breakNext === true){
+      return true;
+    } else if (breakNext === false){
+      return false;
+    }
   }
 
   function init(){
