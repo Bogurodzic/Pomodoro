@@ -226,9 +226,9 @@ var timerSingleton = function () {
 
   function changeMode() {
     var clockText = document.getElementById("clock-text");
-    if (checkBreak()) {
+    if (!checkBreak()) {
       changeClockText(clockText, "Break Time:");
-    } else if (!checkBreak()) {
+    } else if (checkBreak()) {
       changeClockText(clockText, "Remaining Time:");
     }
   }
