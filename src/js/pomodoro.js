@@ -14,8 +14,8 @@ let timerSingleton = (function(){
   }
 
   var timeValues = {
-    break: 0.05,
-    time: 0.02
+    break: 2.00,
+    time: 25.00
   }
 
   var buttons = {
