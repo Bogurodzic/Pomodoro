@@ -35,11 +35,14 @@ body {
   display: inline-block;
   position: absolute;
   top: 30%;
-  font-size: 20px; }
+  font-size: 20px;
+  width: 100%;
+  text-align: center; }
 
 .clock__time {
   text-align: center;
-  font-size: 35px; }
+  font-size: 35px;
+  width: 100%; }
 
 .stop-button {
   margin: 0 auto;
