@@ -3,7 +3,7 @@
 This is one of freecodecamp project.
 In the future I'll do the React version of the pomodoro for comparision vanila js and React. (;
 
-Live version: [[link]](#)
+Live version: [[link]](http://kamiljarzab.pl/Projekty/Pomodoro/)
 
 
 ## Site functionality
